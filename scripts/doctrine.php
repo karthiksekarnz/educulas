@@ -4,14 +4,15 @@
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
-defined('LIBRARY_PATH')
-    || define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../library'));
-
-// Define application environment, (I am only running this in development)
-define('APPLICATION_ENV', 'development');
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 // Ensure library/ is on include_path
-set_include_path(LIBRARY_PATH);
+set_include_path(implode(PATH_SEPARATOR, array(
+    realpath(APPLICATION_PATH . '/../library'),
+    get_include_path(),
+)));
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
@@ -24,10 +25,9 @@ $application = new Zend_Application(
 
 // Bootstrapping resources
 $bootstrap = $application->bootstrap()->getBootstrap();
-$bootstrap->bootstrap('Doctrine');
 
 // Retrieve Doctrine Container resource
-$container = $application->getBootstrap()->getResource('doctrine');
+$container = $bootstrap->getResource('doctrine');
 
 // Console
 $cli = new \Symfony\Component\Console\Application(
@@ -72,6 +72,7 @@ $cli->addCommands(array(
     new \Doctrine\ORM\Tools\Console\Command\GenerateProxiesCommand(),
     new \Doctrine\ORM\Tools\Console\Command\ConvertMappingCommand(),
     new \Doctrine\ORM\Tools\Console\Command\RunDqlCommand(),
+    new \Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand(),
 
 ));
 
