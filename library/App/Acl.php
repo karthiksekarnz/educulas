@@ -10,8 +10,7 @@ class App_Acl extends Zend_Acl
 		$this->add(new Zend_Acl_Resource(App_Resources::ADMIN_SECTION));
 		
 		$this->addRole(new Zend_Acl_Role(App_Roles::GUEST));
-		$this
-		
+	
 	}
 	
 }
