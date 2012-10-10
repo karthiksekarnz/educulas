@@ -41,11 +41,14 @@ class Classes
     private $termEnd;
 
     /**
-     * @var bigint $schoolId
+     * @var School
      *
-     * @Column(name="school_id", type="bigint", nullable=false)
+     * @ManyToOne(targetEntity="School")
+     * @JoinColumns({
+     *   @JoinColumn(name="school_id", referencedColumnName="school_id")
+     * })
      */
-    private $schoolId;
+    private $school;
 
     /**
      * Get classId
@@ -118,22 +121,22 @@ class Classes
     }
 
     /**
-     * Set schoolId
+     * Set school
      *
-     * @param bigint $schoolId
+     * @param School $school
      */
-    public function setSchoolId($schoolId)
+    public function setSchool(\Campus\Entity\School $school)
     {
-        $this->schoolId = $schoolId;
+        $this->school = $school;
     }
 
     /**
-     * Get schoolId
+     * Get school
      *
-     * @return bigint $schoolId
+     * @return School $school
      */
-    public function getSchoolId()
+    public function getSchool()
     {
-        return $this->schoolId;
+        return $this->school;
     }
 }

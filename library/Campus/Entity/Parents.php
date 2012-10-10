@@ -54,7 +54,7 @@ class Parents
      *
      * @param Student $student
      */
-    public function setStudent(\Student $student)
+    public function setStudent(\Campus\Entity\Student $student)
     {
         $this->student = $student;
     }
@@ -74,7 +74,7 @@ class Parents
      *
      * @param UserProfile $parentProf
      */
-    public function setParentProf(\UserProfile $parentProf)
+    public function setParentProf(\Campus\Entity\UserProfile $parentProf)
     {
         $this->parentProf = $parentProf;
     }

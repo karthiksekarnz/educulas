@@ -12,4 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class AttendanceRepository extends EntityRepository
 {
+    function getClassAttendance($classid,$date){
+
+    }
 }

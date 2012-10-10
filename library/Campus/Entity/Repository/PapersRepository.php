@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class PapersRepository extends EntityRepository
 {
+    function getClassesbyTeacher($teacherid){
+
+        $query = $this->_em->createQuery('SELECT c.classId,c.className FROM Campus\Entity\Papers p JOIN p.classes c JOIN p.teacher t WHERE t.staffId =?1');
+        $query->setParameter(1, $teacherid);
+        $result = $query->getArrayResult();
+
+        return $result;
+    }
 }

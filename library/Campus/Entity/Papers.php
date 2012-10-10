@@ -27,20 +27,6 @@ class Papers
     private $paperName;
 
     /**
-     * @var bigint $classId
-     *
-     * @Column(name="class_id", type="bigint", nullable=false)
-     */
-    private $classId;
-
-    /**
-     * @var bigint $schoolId
-     *
-     * @Column(name="school_id", type="bigint", nullable=false)
-     */
-    private $schoolId;
-
-    /**
      * @var smallint $minMarks
      *
      * @Column(name="min_marks", type="smallint", nullable=false)
@@ -55,6 +41,16 @@ class Papers
     private $maxMarks;
 
     /**
+     * @var School
+     *
+     * @ManyToOne(targetEntity="School")
+     * @JoinColumns({
+     *   @JoinColumn(name="school_id", referencedColumnName="school_id")
+     * })
+     */
+    private $school;
+
+    /**
      * @var Teacher
      *
      * @ManyToOne(targetEntity="Teacher")
@@ -63,6 +59,16 @@ class Papers
      * })
      */
     private $teacher;
+
+    /**
+     * @var Classes
+     *
+     * @ManyToOne(targetEntity="Classes", cascade = {"persist"})
+     * @JoinColumns({
+     *   @JoinColumn(name="class_id", referencedColumnName="class_id")
+     * })
+     */
+    private $classes;
 
     /**
      * Get paperId
@@ -92,46 +98,6 @@ class Papers
     public function getPaperName()
     {
         return $this->paperName;
-    }
-
-    /**
-     * Set classId
-     *
-     * @param bigint $classId
-     */
-    public function setClassId($classId)
-    {
-        $this->classId = $classId;
-    }
-
-    /**
-     * Get classId
-     *
-     * @return bigint $classId
-     */
-    public function getClassId()
-    {
-        return $this->classId;
-    }
-
-    /**
-     * Set schoolId
-     *
-     * @param bigint $schoolId
-     */
-    public function setSchoolId($schoolId)
-    {
-        $this->schoolId = $schoolId;
-    }
-
-    /**
-     * Get schoolId
-     *
-     * @return bigint $schoolId
-     */
-    public function getSchoolId()
-    {
-        return $this->schoolId;
     }
 
     /**
@@ -175,11 +141,31 @@ class Papers
     }
 
     /**
+     * Set school
+     *
+     * @param School $school
+     */
+    public function setSchool(\Campus\Entity\School $school)
+    {
+        $this->school = $school;
+    }
+
+    /**
+     * Get school
+     *
+     * @return School $school
+     */
+    public function getSchool()
+    {
+        return $this->school;
+    }
+
+    /**
      * Set teacher
      *
      * @param Teacher $teacher
      */
-    public function setTeacher(\Teacher $teacher)
+    public function setTeacher(\Campus\Entity\Teacher $teacher)
     {
         $this->teacher = $teacher;
     }
@@ -192,5 +178,25 @@ class Papers
     public function getTeacher()
     {
         return $this->teacher;
+    }
+
+    /**
+     * Set class
+     *
+     * @param Classes $class
+     */
+    public function setClassroom(\Campus\Entity\Classes $class)
+    {
+        $this->classes = $class;
+    }
+
+    /**
+     * Get class
+     *
+     * @return Classes $class
+     */
+    public function getClassroom()
+    {
+        return $this->classes;
     }
 }

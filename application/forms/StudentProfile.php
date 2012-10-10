@@ -11,10 +11,21 @@ class Application_Form_StudentProfile extends Twitter_Form
 			
 		));
 
-                $this->addElement("text", "surname", array(
+                $this->addElement("text", "lastname", array(
 			"label" => "Surname"
 		));
 
+                $this->addElement("text", "regno", array(
+			"label" => "Reg number",
+                        "value" => ""
+
+		));
+
+                $this->addElement("text", "username", array(
+			"label" => "Username",
+                        "value" => ""
+
+		));
 
 		$this->addElement("text", "password", array(
 			"label" => "Password",
@@ -25,20 +36,7 @@ class Application_Form_StudentProfile extends Twitter_Form
 			)
 		));
 
-	  $this->addElement("text", "qualification", array(
-			"label" => "Qualification",
-			
-                        "attribs" => array(
-                            "placeholder" => "B.Tech"
-                        )
-		));
-
-		$this->addElement("select", "designation", array(
-			"label" => "Designation",
-			"multiOptions" => array(
-                                "1" => "Asst Professor",
-				"2" => "Senior Lecture"
-			)));
+	 	
 
                 $this->addElement("select", "gender", array(
 			"label" => "Gender",
@@ -55,83 +53,87 @@ class Application_Form_StudentProfile extends Twitter_Form
 				"2" => "US"
 			)));
 
-            $this->addElement("text", "dob", array(
-			"label" => "Date of Birth"
+            $jqueryform = new ZendX_JQuery_Form();
 
-		));
+            $dob = new ZendX_JQuery_Form_Element_DatePicker('dob');
+            $dob->setJQueryParam('dateFormat', 'dd/mm/yy')
+                    ->setLabel('Date of Birth');
 
+            
+           
+            $jqueryform->setElementDecorators(array(
+                'ViewHelper',
+                array(array('data' => 'HtmlTag'),
+                array('tag' => 'div','class' => 'control-group')),
+                'Label'
+                ));           
+
+            $jqueryform->addElements(array($dob));
+            //$dob->setDecorators(array('ViewHelper'));
+
+
+            $this->addSubForm($jqueryform, 'jform');
+
+            
             $this->addElement("text", "pob", array(
 			"label" => "Place of Birth"
 
 		));
-/*
 
-                $this->addElement("text", "lastname", array(
-			"label" => "Last name",
-			"description" => "Foobar"
+                          $this->addElement("text", "streetaddress", array(
+			"label" => "Street Address",
+                        "value" => ""
+
 		));
 
-		$this->addElement("checkbox", "remember_me", array(
-			"label" => "Remember me for two weeks",
+
+            $this->addElement("text", "nationality", array(
+			"label" => "Nationality",
+                        "value" => ""
+
 		));
 
-		$this->addElement("radio", "terms", array(
-			"label" => "I agree to the terms",
+             $this->addElement("text", "religion", array(
+			"label" => "Religion",
+                        "value" => ""
 		));
 
-		$this->addElement("radio", "terms", array(
-			"label" => "Terms",
-			"multiOptions" => array(
-				"1" => "I agree to the terms",
-				"0" => "I don't agree to the terms"
-			)
+
+             $this->addElement("text", "caste", array(
+		  "label" => "Caste",
+                  "value" => ""
+
 		));
 
-		$this->addElement("multicheckbox", "multichecks", array(
-			"description" => "This is a nice thing.",
-			"label" => "Foobar",
-			"multiOptions" => array(
-				"1" => "I agree to the terms",
-				"0" => "I don't agree to the terms"
-			)
+
+             $this->addElement("text", "phno", array(
+		  "label" => "Phone Number",
+                  "value" => ""
+
 		));
 
-		$this->addElement("multicheckbox", "multichecks2", array(
-			"label" => "Inline checkboxes",
-			"inline" => true,
-			"multiOptions" => array(
-				"1" => "One",
-				"0" => "Two"
-			)
+              $this->addElement("text", "passportno", array(
+		  "label" => "Passport Number",
+                  "value" => ""
+
 		));
 
-		$this->addElement("file", "file", array(
-			"label" => "Please upload a file",
-			"required" => true
-			));
+              $this->addElement("text", "mobile", array(
+		  "label" => "Mobile",
+                  "value" => ""
 
-		$this->addElement("hidden", "id", array(
-			"value" => "Test",
-			"label" => "Test"
 		));
 
-		$elm = $this->createElement("text", "foo", array(
-			"label" => "Element created via createElement"));
+              $this->addElement("text", "website", array(
+		  "label" => "Website",
+                  "value" => ""
 
-		$this->addElement($elm);
+		));
 
-		$elm2 = new Zend_Form_Element_Text("foo2", array(
-			"label" => "Via new instance"));
-
-		$this->addElement($elm2);*/
 
 		$this->addElement("submit", "register", array("label" => "Register"));
 		$this->addElement("reset", "reset", array("label" => "Reset"));
-		/*$this->addElement("button", "custom", array(
-			"class" => "success",
-			"label" => "Custom classes, too!"
-		));*/
-
+		
     }
 }
 

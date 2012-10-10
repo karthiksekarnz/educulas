@@ -10,11 +10,12 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->_forward('dashboard');
+        //$this->_forward('dashboard');
     }
 
-    public function dashboardAction(){
-
+    public function dashboardAction()
+    {
+        
         
     }
 

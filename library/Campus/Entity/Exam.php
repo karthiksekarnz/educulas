@@ -108,7 +108,7 @@ class Exam
      *
      * @param Classes $class
      */
-    public function setClass(\Classes $class)
+    public function setClass(\Campus\Entity\Classes $class)
     {
         $this->class = $class;
     }
@@ -128,7 +128,7 @@ class Exam
      *
      * @param School $school
      */
-    public function setSchool(\School $school)
+    public function setSchool(\Campus\Entity\School $school)
     {
         $this->school = $school;
     }

@@ -22,16 +22,10 @@ class UserProfile
     /**
      * @var string $profFirstname
      *
-     * @Column(name="prof_firstname", type="string", length=100, nullable=false)
+     * @Column(name="prof_name", type="string", length=100, nullable=false)
      */
-    private $profFirstname;
+    private $profName;
 
-    /**
-     * @var string $profLastname
-     *
-     * @Column(name="prof_lastname", type="string", length=100, nullable=false)
-     */
-    private $profLastname;
 
     /**
      * @var smallint $profGender
@@ -140,11 +134,11 @@ class UserProfile
     /**
      * Set profFirstname
      *
-     * @param string $profFirstname
+     * @param string $profName
      */
-    public function setProfFirstname($profFirstname)
+    public function setProfName($profName)
     {
-        $this->profFirstname = $profFirstname;
+        $this->profName = $profName;
     }
 
     /**
@@ -152,29 +146,9 @@ class UserProfile
      *
      * @return string $profFirstname
      */
-    public function getProfFirstname()
+    public function getProfName()
     {
-        return $this->profFirstname;
-    }
-
-    /**
-     * Set profLastname
-     *
-     * @param string $profLastname
-     */
-    public function setProfLastname($profLastname)
-    {
-        $this->profLastname = $profLastname;
-    }
-
-    /**
-     * Get profLastname
-     *
-     * @return string $profLastname
-     */
-    public function getProfLastname()
-    {
-        return $this->profLastname;
+        return $this->profName;
     }
 
     /**

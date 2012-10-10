@@ -35,8 +35,7 @@ class Campus_Auth_Adapter implements Zend_Auth_Adapter_Interface
         $this->password = $password;
 
         $em = \Zend_Registry::get('doctrine')->getEntityManager();
-        $this->userRepository = $em->getRepository('\Campus\Entity\Users');
-       
+        $this->userRepository = $em->getRepository('\Campus\Entity\Users');       
 
     }
 

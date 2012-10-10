@@ -1,6 +1,6 @@
 <?php
 
-class Twitter_Form extends Zend_Form
+class Twitter_Form extends ZendX_JQuery_Form
 {
 	public function __construct($options = null)
 	{

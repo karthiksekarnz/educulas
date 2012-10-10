@@ -58,12 +58,10 @@ class StaffService {
         $this->userent->setLastVisitedTime($currentdate);
         $this->userent->setLastVisitedIp('104.234.43.57');//($this->_request->getServer('REMOTE_ADDR'));
 
-        $ex = $this->em->getRepository('\Campus\Entity\Usertype')->findOneByuserType('teacher');
-        print_r($ex);
+        
         $this->userent->setUserType($this->em->getRepository('Campus\Entity\Usertype')->findOneByuserType('teacher'));
 
-        $this->profileent->setProfFirstName($staffprofile['firstname']);
-        $this->profileent->setProfLastName($staffprofile['lastname']);
+        $this->profileent->setProfName($staffprofile['firstname']." ".$staffprofile['lastname']);
         $this->profileent->setProfGender($staffprofile['gender']);
         $this->profileent->setProfDob($staffprofile['dob']);
         $this->profileent->setProfPob($staffprofile['pob']);

@@ -8,6 +8,7 @@ namespace Campus\Entity;
  * @Table(name="attendance")
  * @Entity(repositoryClass = "Campus\Entity\Repository\AttendanceRepository")
  */
+
 class Attendance
 {
     /**
@@ -18,6 +19,13 @@ class Attendance
      * @GeneratedValue(strategy="IDENTITY")
      */
     private $attdId;
+
+    /**
+     * @var date $attdDate
+     *
+     * @Column(name="attd_date", type="date", nullable=false)
+     */
+    private $attdDate;
 
     /**
      * @var smallint $attdRating
@@ -71,6 +79,26 @@ class Attendance
     public function getAttdId()
     {
         return $this->attdId;
+    }
+
+    /**
+     * Set attdDate
+     *
+     * @param date $attdDate
+     */
+    public function setAttdDate($attdDate)
+    {
+        $this->attdDate = $attdDate;
+    }
+
+    /**
+     * Get attdDate
+     *
+     * @return date $attdDate
+     */
+    public function getAttdDate()
+    {
+        return $this->attdDate;
     }
 
     /**

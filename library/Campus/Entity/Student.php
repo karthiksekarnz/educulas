@@ -36,7 +36,7 @@ class Student
     /**
      * @var UserProfile
      *
-     * @ManyToOne(targetEntity="UserProfile")
+     * @ManyToOne(targetEntity="UserProfile",cascade = {"persist"})
      * @JoinColumns({
      *   @JoinColumn(name="stud_prof_id", referencedColumnName="prof_id")
      * })
@@ -128,7 +128,7 @@ class Student
      *
      * @param UserProfile $studProf
      */
-    public function setStudProf(\UserProfile $studProf)
+    public function setStudProf(\Campus\Entity\UserProfile $studProf)
     {
         $this->studProf = $studProf;
     }
@@ -148,7 +148,7 @@ class Student
      *
      * @param Parents $studParent
      */
-    public function setStudParent(\Parents $studParent)
+    public function setStudParent(\Campus\Entity\Parents $studParent)
     {
         $this->studParent = $studParent;
     }
@@ -168,7 +168,7 @@ class Student
      *
      * @param Classes $studClass
      */
-    public function setStudClass(\Classes $studClass)
+    public function setStudClass(\Campus\Entity\Classes $studClass)
     {
         $this->studClass = $studClass;
     }
@@ -188,7 +188,7 @@ class Student
      *
      * @param School $studSchool
      */
-    public function setStudSchool(\School $studSchool)
+    public function setStudSchool(\Campus\Entity\School $studSchool)
     {
         $this->studSchool = $studSchool;
     }

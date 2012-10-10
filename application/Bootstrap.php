@@ -14,6 +14,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $appAutoloader = new \Doctrine\Common\ClassLoader('Campus');
         $autoloader->pushAutoloader(array($appAutoloader, 'loadClass'), 'Campus');
+        
+        $entityClassLoader = new \Doctrine\Common\ClassLoader('Entity');
+        $autoloader->pushAutoloader(array($entityClassLoader, 'loadClass'), 'Entity');
+
     }
 
 }

@@ -69,6 +69,7 @@ class ZendX_JQuery_View_Helper_DatePicker extends ZendX_JQuery_View_Helper_UiWid
         );
 
         $this->jquery->addOnLoad($js);
+        
 
         return $this->view->formText($id, $value, $attribs);
     }

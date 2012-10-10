@@ -39,6 +39,17 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
+.wrapper {
+    min-height: 100%;
+    height: auto !important; /* ie7 fix */
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+.foot, .push {
+     height: 4em;
+}
+
 a:focus {
   outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
@@ -563,7 +574,15 @@ a:hover {
 .container-fluid {
   padding-right: 20px;
   padding-left: 20px;
+  padding-top: 40px;
   *zoom: 1;
+}
+
+.signin{
+    margin: 12px 0 0;
+padding: 20px 25px 15px;
+background: #F1F1F1;
+border: 1px solid #E5E5E5;
 }
 
 .container-fluid:before,
