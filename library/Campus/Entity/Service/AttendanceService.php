@@ -61,6 +61,8 @@ class AttendanceService
             {
                echo $student->getStudProf()->getProfName()."<hr>";
             }
+
+           
         }
 
         else
