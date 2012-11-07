@@ -1,0 +1,13 @@
+<br /><br />
+<div id="view-content">
+	<?php
+            echo $this->year;
+            echo $this->classy;
+              echo  $this->tabPane('months','this is january',array('title'=> 'january'));
+              echo $this->tabPane('months','this is febraury',array('title'=> 'febraury'));
+            ?>
+
+            <?php
+              echo $this->tabContainer('months',array('selected' => '1'),array('class' => 'start','width'=>'300'));
+            ?>
+</div>

@@ -12,20 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeacherRepository extends EntityRepository
 {
-    function getAllTeachersLike($schid,$q){
-
+    function getAllTeachersLike($schid,$q)
+    {
         $params = array('schoolid' => $schid,'stname' => $q);
         $query = $this->_em->createQuery('SELECT t.staffId id,up.profName name FROM Campus\Entity\Teacher t JOIN t.profile up WHERE (t.school = :schoolid AND up.profName LIKE :stname)');
         $query->setParameters($params);
         $result = $query->getArrayResult();
 
-        return $result;
-
-        
+        return $result;        
     }
 
-    function getAllSchoolTeachers($schid){
-
+    function getAllSchoolTeachers($schid)
+    {
         $query = $this->_em->createQuery('SELECT t.staffId id,up.profName name FROM Campus\Entity\Teacher t JOIN t.profile up WHERE t.school = ?1');
         $query->setParameter(1, $schid);
         $result = $query->getArrayResult();

@@ -1,14 +1,30 @@
     <!-- Docs nav
     ================================================== -->
     <div class="row">
-      <div class="span3 sidebar">
+      <div class="span2 sidebar">
         <?php echo $this -> partial('/admin/sidebar.phtml');?>
       </div>
 
-        <div class="span9">
+        <div class="span9" style="margin-bottom: 15px;">
           <h3>Attendance</h3>
         
-            <?= $this->attendanceform; ?><br />
-            <?= $this->grid; ?>
-      </div>
+            <?= $this->attendanceform; ?>
+           
+       <?php
+
+       echo $this->ajaxLink('load',
+      'attendance/show',
+      array('update' => '.span10',
+            'form'=>'.form-vertical',
+            'attribs' => array('class' => 'btn btn-primary'),
+             'method' => 'post'),
+      array('datatype' => 'json')
+      );
+            
+       ?>
+            <!--<a href="#" class="alnk btn btn-primary" onclick="jQuery.post('attendance/show',jQuery('.form-vertical').serialize(), function(data) { jQuery('.span10').html(data); });return false; }">load</a>
+            <a href="#" class="btn btn-primary" onclick="$('.span10').load('attendance/show','(\'.form-vertical\').serialize();'); return false;">load</a>-->
+           
+      </div> 
+        <div class="span10"> </div>
     </div>

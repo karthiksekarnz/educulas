@@ -240,15 +240,41 @@ class ZendX_JQuery_View_Helper_AjaxLink extends Zend_View_Helper_HtmlElement
             }
         }
 
-        switch($requestHandler) {
-            case 'GET':
+        $method = $options['method'];
+        
+        switch($method) {
+            case 'get':
                 $js[] = sprintf('%s.get("%s", %s, function(data, textStatus) { %s }, "%s");return false;',
                     $jqHandler, $url, $params, implode(' ', $callbackCompleteJs), $options['dataType']);
                 break;
-            case 'POST':
+            case 'post':
+                if(isset($options['form']))
+                {
+                    
+                    $js[] = sprintf('%s.post("%s",%s("%s").serialize(), function(data, textStatus) { %s }, "%s");return false;',
+                    $jqHandler, $url, $jqHandler,$options['form'], implode(' ', $callbackCompleteJs), $options['dataType']);
+                }
+                else
+                {
                 $js[] = sprintf('%s.post("%s", %s, function(data, textStatus) { %s }, "%s");return false;',
                     $jqHandler, $url, $params, implode(' ', $callbackCompleteJs), $options['dataType']);
+                }
                 break;
+
+                case 'load':
+                    
+                if(isset($options['form']))
+                {
+                    $js[] = sprintf('%s("%s").load("%s",%s("%s").serialize(), function() { %s });return false;',
+                    $jqHandler,$options['update'], $url, $jqHandler,$options['form'],$attribs['propagate']);
+                }
+                else
+                {
+                $js[] = sprintf('%s("%s").load("%s",function() { %s });return false;',
+                    $jqHandler,$options['update'], $url,$attribs['propagate']);
+                }
+
+               break;
         }
 
         $js = implode($js);
@@ -261,7 +287,7 @@ class ZendX_JQuery_View_Helper_AjaxLink extends Zend_View_Helper_HtmlElement
                 ZendX_JQuery_View_Helper_AjaxLink::$currentLinkCallbackId++;
 
                 $attribs['class'][] = $clickClass;
-                $onLoad = sprintf('%s("a.%s").click(function() { %s });', $jqHandler, $clickClass, $js);
+                $onLoad = sprintf('%s("a.%s").live("click",function() { %s });', $jqHandler, $clickClass, $js);
             } else {
                 $onLoad = sprintf('%s("a#%s").click(function() { %s });', $jqHandler, $attribs['id'], $js);
             }

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>attendance sheet</title>
+ <?php
+        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+ ?>
+  
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <link rel ="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/flick/jquery-ui.css" />  
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?=$baseUrl;?>/stuff/css/custom.css" />
+  
+
+       <style type="text/css">
+        .tabgrid {
+            font-size: 75%;
+        }
+
+        #tabs>div{
+         /*   margin: 0;
+            padding: 0;*/
+        }
+    </style>
+
+<script type="text/javascript">
+ 
+      jQuery(document).ready(function(){
+      
+      var mi = <?=$this->month;?>;
+
+     jQuery("#tabs").tabs({
+         collapsible: false,
+         width:'100%',
+         selected:<?= $this->month - 1; ?>       
+
+     });     
+     jQuery('*[data-month ="'+mi+'"]').bind('click',function(){
+     jQuery("#jqgrid").load('attendance/showgrid',{month:mi,year:<?=$this->year;?>,classy:<?=$this->classy;?>});
+              //return false;
+      });
+
+        jQuery('*[data-month ="'+mi+'"]').trigger('click');
+
+        jQuery("#tabs>ul>li>a").click(function(){
+            jQuery('.loader').show();
+            var month = jQuery(this).attr("data-month");
+            jQuery("#jqgrid").load('attendance/showgrid',{month:month,year:<?=$this->year;?>,classy:<?=$this->classy;?>},function(){jQuery(".loader").hide(); });
+              return false;
+         });
+     });
+    </script>
+
+
+</head>
+
+<body class="tabgrid">
+
+    <div id="tabs">
+
+        <div class="loader"><img src ="<?=$baseUrl;?>/stuff/img/ajax-loader.gif"><br /> Loading...</div>
+        <ul>
+            <li><a href="#jqgrid" data-month="1">jan</a></li>
+            <li><a href="#jqgrid" data-month="2">feb</a></li>
+            <li><a href="#jqgrid" data-month="3">mar</a></li>
+            <li><a href="#jqgrid" data-month="4">apr</a></li>
+            <li><a href="#jqgrid" data-month="5">may</a></li>
+            <li><a href="#jqgrid" data-month="6">jun</a></li>
+            <li><a href="#jqgrid" data-month="7">jul</a></li>
+            <li><a href="#jqgrid" data-month="8">aug</a></li>
+            <li><a href="#jqgrid" data-month="9">sep</a></li>
+            <li><a href="#jqgrid" data-month="10">oct</a></li>
+            <li><a href="#jqgrid" data-month="11">nov</a></li>
+            <li><a href="#jqgrid" data-month="12">dec</a></li>
+        </ul>
+      
+        <div id="jqgrid">
+            
+        </div>
+
+       
+    </div>
+    
+   
+</body>
+</html>

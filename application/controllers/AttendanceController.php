@@ -3,68 +3,74 @@
 class AttendanceController extends Zend_Controller_Action
 {
 
+    protected $em = null;
+
     public function init()
     {
-        /* Initialize action controller here */
+        $this->em = Zend_Registry::get('doctrine')->getEntityManager();
     }
 
     public function indexAction()
     {
         $attendenceForm = new Application_Form_Attendance();
-        $this->view->attendanceform = $attendenceForm;
+        $this->view->attendanceform = $attendenceForm;         
+    }
 
-         $books = array(
-            array(  'title' => 'PHP Objects, Patterns, and Practice (2nd edition)',
-                    'author' => 'Matt Zandstra',
-                    'purchased' => '2006-05-01'),
-
-            array(  'title' => 'Patterns of Enterprise Application Architecture',
-                    'author' => 'Martin Fowler',
-                    'purchased' => '2007-08-10'),
-
-            array(  'title' => 'Domain Driven Design: Tackling Complexity in the Heart of Software',
-                    'author' => 'Eric Evans',
-                    'purchased' => '2009-02-06')
-        );
-
-      $colmodel = '[
-           {name:"title",index:"title", width:200, editable:true},
-           {name:"author",index:"author", width:80, align:"right",sorttype:"float", formatter:"number", editable:true},
-           {name:"purchased",index:"purchased", width:80, align:"right",sorttype:"float", editable:true},
-          ]';
-
-      $dat = '[{id:"1",invdate:"2010-05-24",name:"test",note:"note",tax:"10.00",total:"2111.00"},{id:"2",invdate:"2010-05-25",name:"test2",note:"note2",tax:"20.00",total:"320.00"}, {id:"3",invdate:"2007-09-01",name:"test3",note:"note3",tax:"30.00",total:"430.00"},{id:"4",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",tax:"20.00",total:"320.00"}]';
-      $colm = "[{name:'id',index:'id', width:60, sorttype:'int'},{name:'invdate',index:'invdate', width:90, sorttype:'date', formatter:'date'},{name:'name',index:'name', width:100, editable:true},{name:'amount',index:'amount', width:80, align:'right',sorttype:'float', formatter:'number', editable:true},{name:'tax',index:'tax', width:80, align:'right',sorttype:'float', editable:true},{name:'total',index:'total', width:80,align:'right',sorttype:'float'},{name:'note',index:'note', width:150, sortable:false}]";
-
-      
-      $options = array(
-     "data" => $dat,
-     "datatype" => "local",
-     "height" => 'auto',
-     "rowNum" => 30,
-     "url" => "dummy",
-     "rowList" => array(10,20,30),
-      "colNames" => array('Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'),
-       "colModel" => $colm,
-       "pager" => "#pager",
-       "viewrecords" => true,
-      "cellEdit" => true,
-       "caption" => "jqGrid multigrouping with 'groupingGroupBy' method"
-     );
-
-        $grid = new Ingot_JQuery_JqGrid('grid',
-                     new Ingot_JQuery_JqGrid_Adapter_Array($books),$options);
-
-      
-         
-         $grid->registerPlugin(new Ingot_JQuery_JqGrid_Plugin_ToolbarFilter());
-                 
-         $this->view->grid =  $grid->render();
-
+    public function showAction()
+    {
+	$this->_helper->getHelper('layout')->disableLayout();    
         
+        
+          if($this->_request->getPost())
+          {            
+             $attdparams = $this->_getAllParams();      
+          }
+           
+          $this->view->month = date('m');
+          $this->view->year = $attdparams['year'];
+          $this->view->classy = $attdparams['classy'];
+          $this->view->caption = date('m');
+         
 
     }
 
+    public function showgridAction()
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+
+          if($this->_request->getPost())
+          {
+             $attdparams = $this->_getAllParams();
+             $month = $attdparams['month'];
+
+             $attdservice = new \Campus\Entity\Service\AttendanceService($this->em);
+             $attdsheet = $attdservice->prepareattdsheet($attdparams,$month);
+
+             $nm = cal_days_in_month(CAL_GREGORIAN, $month, $attdparams['year']);
+             $colnames = array('student');
+             $colmodel = array(array('name' => 'stud', 'index' => 'stud', 'editable' => 'true'));
+
+             foreach(range(1,$nm) as $day)
+             {
+                 array_push($colnames,$day);
+                 array_push($colmodel,array('name' => $day, 'index' => $day, 'editable' => 'true','width' => '25px'));
+             }
+
+         }
+
+          $this->view->colnames = Zend_Json::encode($colnames);
+          $this->view->colmodel = Zend_Json::encode($colmodel);
+          $this->view->attdsheet = $attdsheet;
+          $this->view->month = $month;
+
+       /* $this->view->colnames = "[\"student\",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]";
+        $this->view->colmodel = "[{\"name\":\"stud\",\"index\":\"stud\",\"editable\":\"true\"},{\"name\":1,\"index\":1,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":2,\"index\":2,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":3,\"index\":3,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":4,\"index\":4,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":5,\"index\":5,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":6,\"index\":6,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":7,\"index\":7,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":8,\"index\":8,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":9,\"index\":9,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":10,\"index\":10,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":11,\"index\":11,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":12,\"index\":12,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":13,\"index\":13,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":14,\"index\":14,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":15,\"index\":15,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":16,\"index\":16,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":17,\"index\":17,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":18,\"index\":18,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":19,\"index\":19,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":20,\"index\":20,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":21,\"index\":21,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":22,\"index\":22,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":23,\"index\":23,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":24,\"index\":24,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":25,\"index\":25,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":26,\"index\":26,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":27,\"index\":27,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":28,\"index\":28,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":29,\"index\":29,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":30,\"index\":30,\"editable\":\"true\",\"width\":\"25px\"}]";
+        $this->view->attdsheet = "[{\"id\":\"1\",\"stud\":\"karthik Sekar\"},{\"id\":\"2\",\"stud\":\"Anand Sathya\"},{\"id\":\"3\",\"stud\":\"mayank sharma\"},{\"id\":\"4\",\"stud\":\"shashanl kapoor\"}]";*/
+    }
 
 }
+
+
+
+
 

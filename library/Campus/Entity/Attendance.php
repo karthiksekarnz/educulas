@@ -21,16 +21,16 @@ class Attendance
     private $attdId;
 
     /**
-     * @var date $attdDate
+     * @var datetime $attdDate
      *
-     * @Column(name="attd_date", type="date", nullable=false)
+     * @Column(name="attd_date", type="datetime", nullable=false)
      */
     private $attdDate;
 
     /**
      * @var smallint $attdRating
      *
-     * @Column(name="attd_rating", type="smallint", nullable=true)
+     * @Column(name="attd_rating", type="date", nullable=true)
      */
     private $attdRating;
 
@@ -84,7 +84,7 @@ class Attendance
     /**
      * Set attdDate
      *
-     * @param date $attdDate
+     * @param datetime $attdDate
      */
     public function setAttdDate($attdDate)
     {
@@ -94,7 +94,7 @@ class Attendance
     /**
      * Get attdDate
      *
-     * @return date $attdDate
+     * @return datetime $attdDate
      */
     public function getAttdDate()
     {

@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+<?php echo $this->headLink(); ?>
 
-    <?php echo $this->headLink(); ?>
+   
+
     <?php echo $this->jQuery()
            ->setVersion('1.8')
            ->setUiVersion('1.8')
            ->addStylesheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/flick/jquery-ui.css')
     ?>
-   
     
+     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <?php echo $this->headLink(); ?>
 
     <?php
@@ -22,14 +24,19 @@
         $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
 
         echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme.css');
+        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/custom.css');
         echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme-responsive.css');
         echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/docs.css');
         echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/js/google-code-prettify/prettify.css');
         echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/token-input.css');
         echo  $this->headScript()->appendFile($baseUrl.'/stuff/js/jquery.tokeninput.js');
+        echo  $this->headScript()->appendFile($baseUrl.'/js/bootstrap.min.js');
+        echo  $this->headScript()->appendFile($baseUrl.'/js/bootstrap-button.js');
+   
+
    ?>
 
-
+    
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -66,15 +73,20 @@
 
     </div>
 <!-- Subhead
-==================================================
+================================================== 
 <header class="jumbotron subhead" id="overview">
   <div class="container">
     <h1>General Information</h1>
     <p class="lead">Overview of the project, it's contents, and how to get started with a simple template.</p>
   </div>
-</header>
-
--->
+</header> -->
+<div id="shadow-head" style="height: 58px;
+background-repeat: repeat-x;
+position: fixed;
+top: 64px;
+width: 100%;
+z-index: -5;
+display: block;"></div>
 
   <div class="container container-fluid">
       
@@ -96,25 +108,10 @@
   <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="/stuff/js/jquery.js"></script>
-    <script src="/stuff/js/google-code-prettify/prettify.js"></script>
-    <script src="/stuff/js/mytheme-transition.js"></script>
-    <script src="/stuff/js/mytheme-alert.js"></script>
-    <script src="/stuff/js/mytheme-modal.js"></script>
-    <script src="/stuff/js/mytheme-dropdown.js"></script>
-    <script src="/stuff/js/mytheme-scrollspy.js"></script>
-    <script src="/stuff/js/mytheme-tab.js"></script>
-    <script src="/stuff/js/mytheme-tooltip.js"></script>
-    <script src="/stuff/js/mytheme-popover.js"></script>
-    <script src="/stuff/js/mytheme-button.js"></script>
-    <script src="/stuff/js/mytheme-collapse.js"></script>
-    <script src="/stuff/js/mytheme-carousel.js"></script>
-    <script src="/stuff/js/mytheme-typeahead.js"></script>
-    <script src="/stuff/js/mytheme-affix.js"></script>
-    <script src="/stuff/js/application.js"></script>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>   
+    <script type="text/javascript" src="/stuff/js/google-code-prettify/prettify.js"></script>
 
-
+   
 
   </body>
 </html>

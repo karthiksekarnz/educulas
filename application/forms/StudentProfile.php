@@ -46,31 +46,16 @@ class Application_Form_StudentProfile extends Twitter_Form
 			)));
 
 
-                $this->addElement("select", "citizenship", array(
-			"label" => "Citizenship",
-			"multiOptions" => array(
-                                "1" => "India",
-				"2" => "US"
-			)));
-
             $jqueryform = new ZendX_JQuery_Form();
 
             $dob = new ZendX_JQuery_Form_Element_DatePicker('dob');
             $dob->setJQueryParam('dateFormat', 'dd/mm/yy')
                     ->setLabel('Date of Birth');
-
-            
-           
-            $jqueryform->setElementDecorators(array(
-                'ViewHelper',
-                array(array('data' => 'HtmlTag'),
-                array('tag' => 'div','class' => 'control-group')),
-                'Label'
-                ));           
-
+             
+          
             $jqueryform->addElements(array($dob));
-            //$dob->setDecorators(array('ViewHelper'));
-
+             $jqueryform->removeDecorator();
+          
 
             $this->addSubForm($jqueryform, 'jform');
 
@@ -80,7 +65,7 @@ class Application_Form_StudentProfile extends Twitter_Form
 
 		));
 
-                          $this->addElement("text", "streetaddress", array(
+            $this->addElement("text", "streetaddress", array(
 			"label" => "Street Address",
                         "value" => ""
 
@@ -133,6 +118,26 @@ class Application_Form_StudentProfile extends Twitter_Form
 
 		$this->addElement("submit", "register", array("label" => "Register"));
 		$this->addElement("reset", "reset", array("label" => "Reset"));
+
+       $this->addDisplayGroups(array(
+    'left' => array(
+        'options'  => array('description' => ''),
+        'elements' => array('firstname', 'lastname', 'gender', 'regno','username', 'password','pob','streetaddress'),
+    ),
+    
+    'right' => array(
+        'options'  => array('description' => ''),
+        'elements' => array('nationality', 'religion', 'caste', 'phno', 'passportno', 'mobile','website'),
+    ),
+        'bottom' => array(
+         'options' => array("class" => "form-actions"),
+        'elements' => array('register','reset'),
+    )
+  ));
+ 
+
+$this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
+
 		
     }
 }

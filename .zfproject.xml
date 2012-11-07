@@ -41,6 +41,8 @@
         </controllerFile>
         <controllerFile controllerName="Attendance">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="show"/>
+          <actionMethod actionName="showgrid"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -103,6 +105,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Attendance">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Attendance">
+            <viewScriptFile forActionName="show"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Attendance">
+            <viewScriptFile forActionName="showgrid"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

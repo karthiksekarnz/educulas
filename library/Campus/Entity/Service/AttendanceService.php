@@ -45,10 +45,16 @@ class AttendanceService
         $this->attdent = new \Campus\Entity\Attendance();
         $this->classesent =  new \Campus\Entity\Classes();
         $this->upent = new \Campus\Entity\UserProfile();
-
     }
 
-    public function prepareattdsheet($attdparams)
+    public function prepareattdsheet($attdparams,$month)
+    {    
+      $datagrid = $this->em->getRepository('Campus\Entity\Attendance')->getattdByMonth($attdparams,$month);
+        
+      return $datagrid;
+    }
+
+    public function preparecalendar($attdparams)
     {
         $attd = $this->em->getRepository('Campus\Entity\Attendance')->findBy(array('class' => $attdparams['classroom'],'attdDate' => $attdparams['date']));
 
@@ -60,9 +66,7 @@ class AttendanceService
             foreach($attdstudents as $student)
             {
                echo $student->getStudProf()->getProfName()."<hr>";
-            }
-
-           
+            }           
         }
 
         else

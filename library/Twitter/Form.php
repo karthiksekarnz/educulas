@@ -81,7 +81,7 @@ class Twitter_Form extends ZendX_JQuery_Form
 			$element->removeDecorator("outerwrapper");
 			$element->removeDecorator("innerwrapper");
 
-			$this->_addActionsDisplayGroupElement($element);
+			//$this->_addActionsDisplayGroupElement($element);
 
 			//$element->addDecorator(array(
 				//"outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "actions")

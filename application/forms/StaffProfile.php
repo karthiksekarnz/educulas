@@ -28,7 +28,6 @@ class Application_Form_StaffProfile extends Twitter_Form
 
                  $this->addElement("text", "username", array(
 			"label" => "Username",
-                         "description" => "Auto-generated",
                         "value" => ""
 
 		));
@@ -37,7 +36,6 @@ class Application_Form_StaffProfile extends Twitter_Form
 			"label" => "Password",
 			"required" => true,
                         "value" => substr(sha1(mt_rand()), 0, 16),
-                        "description" => "auto-generated",
                         "attribs" => array(				
                                 "maxlength" => 5
 			)
@@ -124,6 +122,24 @@ class Application_Form_StaffProfile extends Twitter_Form
 
 		$this->addElement("submit", "register", array("label" => "Register"));
 		$this->addElement("reset", "reset", array("label" => "Reset"));
+
+
+    $this->addDisplayGroups(array(
+    'left' => array(
+        'options'  => array('description' => ''),
+        'elements' => array('firstname', 'lastname', 'gender', 'username', 'password', 'qualification','doj','dob','pob','streetaddress'),
+    ),
+    'right' => array(
+        'options'  => array('description' => ''),
+        'elements' => array('nationality', 'religion', 'caste', 'phno', 'passportno', 'mobile','website'),
+    ),
+        'bottom' => array(
+         'options' => array("class" => "form-actions"),
+        'elements' => array('register','reset'),
+    )
+  ));
+
+$this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
 
 
     }

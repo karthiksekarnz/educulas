@@ -96,6 +96,7 @@ class ZendX_JQuery_View_Helper_TabContainer extends ZendX_JQuery_View_Helper_UiW
             foreach($this->_tabs[$id] AS $k => $v) {
                 $frag_name = sprintf('%s-frag-%d', $attribs['id'], $fragment_counter++);
                 $opts = $v['options'];
+              
                 if(isset($opts['contentUrl'])) {
                     $list .= '<li class="ui-tabs-nav-item"><a href="'.$opts['contentUrl'].'"><span>'.$v['name'].'</span></a></li>'.PHP_EOL;
                 } else {
