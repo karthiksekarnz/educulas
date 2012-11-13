@@ -16,20 +16,33 @@
  */
 
  body{
-    background: #FAFAFA;
+    background: url(http://subtlepatterns.com/patterns/white_brick_wall.png) #FAFAFA;
 }
 
- .loader {
-position: absolute;
-top: 45%;
-left: 45%;
+.foot{
+    bottom: 0;
+    position: absolute;
+    padding: 2%;   
+}
+
+.adminbox
+{
+    background: #FAFAFA;
+    box-shadow: 0px 0px 8px #7AE0FF;
+    -moz-box-shadow: 0px 0px 8px #7AE0FF;
+    -webkit-box-shadow: 0px 0px 8px #7AE0FF;
+}
+
+
+.loader {
+
 width: auto;
 z-index: 101;
 padding: 6px;
 margin: 5px;
 text-align: center;
 font-weight: bold;
-display: none;
+display: block;
 border-width: 2px !important;
 font-size: 11px;
 }
@@ -85,26 +98,13 @@ form fieldset .hint
     float:left;
 }
 
-#jqgrid{
-    min-height: 400px;
-}
+
 
 .ui-jqgrid tr.jqgrow td {
   white-space: normal !important;
   height:auto;
   vertical-align:text-top;
   padding-top:2px;
-}
-
-#shadowform
-{
-  position: absolute;
-  width: 434px;
-  z-index: -1;
-  margin-top: 5px;
-  background-image: url('/zend/stuff/img/shadowform.png');
-  height: 33px;
-  margin-left: -20px;
 }
 
 #shadow-head
@@ -119,11 +119,12 @@ display: block;
 }
 
 .signin{
-    margin: 12px 0 0;
+margin: 12px 0 0;
 padding: 20px 25px 15px;
 background: #F1F1F1;
-
 }
+
+
 
 .nav > li > a:hover {
 text-decoration: none;
@@ -134,16 +135,16 @@ color: white;
 
 .shadowbox
 {
-    box-shadow: 0px 0px 8px #999;
-    -moz-box-shadow: 0px 0px 8px #999;
-    -webkit-box-shadow: 0px 0px 8px #999;
+    box-shadow: 0px 0px 3px #999;
+    -moz-box-shadow: 0px 0px 3px #999;
+    -webkit-box-shadow: 0px 0px 3px #999;
 }
 
 #view-content
 {
     background: #fff;
     padding: 20px 25px 15px;
-
+    min-height: 400px;
 }
 
 

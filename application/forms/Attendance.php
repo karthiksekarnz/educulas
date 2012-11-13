@@ -43,7 +43,7 @@ class Application_Form_Attendance extends Twitter_Form {
         $classlist->setLabel("class list");
         $this->addElement($classlist);
          
-  $this->addElement("select", "year", array(
+            $this->addElement("select", "year", array(
 			"label" => "Academic year",
 			"multiOptions" => array(
                                 "2010" => "2010",

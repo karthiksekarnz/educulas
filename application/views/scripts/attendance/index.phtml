@@ -3,16 +3,20 @@
      <?php
         $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
  ?>
+    <br/>
     <div class="row">
       <div class="span2 sidebar">
-        <?php echo $this -> partial('/admin/sidebar.phtml');?>
-      </div>
 
-        <div class="span9" style="margin-bottom: 15px;">
-          <h3>Attendance</h3>
-        
+              <?php echo $this -> partial('admin/sidebar.phtml');?>
+      </div>
+          
+        <div class="span10">
+
+          <div class="shadowbox dashboard" id="view-content">
+              <div class="span9">
+            <h3>Attendance</h3>
             <?= $this->attendanceform; ?>
-          <fieldset id="fieldset-col3" class="">
+             <fieldset id="fieldset-col3" class="">
               <div class="control-group">
                   <label for=".ajaxLink1" class="control-label optional"></label>
                   <div class="controls">
@@ -21,20 +25,24 @@
 
        echo $this->ajaxLink('load',
       'attendance/show',
-      array('update' => '.span10',
+      array('update' => '.agrid',
             'form'=>'.form-vertical',
             'attribs' => array('class' => 'btn btn-primary'),
              'method' => 'post'),
       array('dataType' => 'json')
       );
-            
+
        ?>
                   </div>
               </div>
           </fieldset>
-           
-      </div> 
-        <div class="span10">
-            
+              </div>
+              <div class="agrid span9">
+
         </div>
+
+            </div>
+        
+      </div> 
+       
     </div>

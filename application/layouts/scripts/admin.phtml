@@ -8,34 +8,14 @@
     <meta name="author" content="">
 
 
-    <?php echo $this->jQuery()
-           ->setVersion('1.8')
-           ->setUiVersion('1.8')
-           ->addStylesheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/flick/jquery-ui.css')
-    ?>
-
-     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-    
-
    <?php
-
           $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
           $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme.css');
           $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/custom.css');
           $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme-responsive.css');
-          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/docs.css');
-          $this->headLink()->appendStylesheet($baseUrl.'/stuff/js/google-code-prettify/prettify.css');
-          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/token-input.css');
-          $this->headScript()->appendFile($baseUrl.'/stuff/js/jquery.tokeninput.js');
-          $this->headScript()->appendFile($baseUrl.'/js/bootstrap.min.js');
-          $this->headScript()->appendFile($baseUrl.'/js/bootstrap-button.js');
-
+ 
         echo $this->headLink();
-
-
    ?>
-
-
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,9 +32,9 @@
 
   </head>
 
-  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+  <body class="admin" data-spy="scroll" data-target=".bs-docs-sidebar">
 
-    <!-- Navbar
+     <!-- Navbar
     ================================================== -->
     <div class="navbar navbar-fixed-top shadowbox">
       <div class="navbar-inner">
@@ -73,7 +53,7 @@
 
     </div>
 <!-- Subhead
-================================================== 
+==================================================
 <header class="jumbotron subhead" id="overview">
   <div class="container">
     <h1>General Information</h1>
@@ -81,6 +61,7 @@
   </div>
 </header> -->
 <div id="shadow-head"></div>
+
 
   <div class="container container-fluid">
       
@@ -90,7 +71,7 @@
 </div>
 
 
-<div class="footer" style="padding:2%;">
+<div class="footer foot">
    
          <div class="container">
               
@@ -108,9 +89,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>   
-    <script type="text/javascript" src="/stuff/js/google-code-prettify/prettify.js"></script>
-
-   
+    <script type="text/javascript" src="/stuff/js/google-code-prettify/prettify.js"></script>   
 
   </body>
 </html>

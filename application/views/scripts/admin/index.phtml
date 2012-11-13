@@ -1,6 +1,8 @@
 <div class="marketing">
 
+ <?php
 
+          $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();?>
     <p class="marketing-byline">
 
     </p>
@@ -9,9 +11,12 @@
       <div class="span4">    &nbsp
 
       </div>
-        <div class="span4" >
-          <h3> Administration Login</h3>
-          <div class="signin" style="text-align: left;">
+        
+        <div class="span4 adminbox" style="text-align: center;margin-top:10%;" >
+            
+            <h3 style="color:orange">Admin Login</h3>
+         
+          <div class="signin " style="text-align: left;">
 
 <p class="error"><?=$this->message;?></p>
 
@@ -26,7 +31,7 @@
 
 
       <p class="lead">
-    &nbsp
+    
 
 
 </p>

@@ -6,15 +6,20 @@ class IndexController extends Zend_Controller_Action
 {
 
     protected $_em = null;
+    protected $session;
 
     public function init()
     {
-        
+        $this->session = new Zend_Session_Namespace('campus.auth');
     }
 
     public function indexAction()
     {
-      
+        if(isset($this->session->user))
+        {
+             unset($this->session->user);
+        }
+       
         $loginform = new Application_Form_Login();
         $this->view->loginform = $loginform;
 
@@ -29,15 +34,12 @@ class IndexController extends Zend_Controller_Action
 
               if ($result->isValid())
               {
-    	         $session = new Zend_Session_Namespace('campus.auth');
-                 //--$session->user = $adapter->getResultArray('Password'); <-- original code
+                $this->session->user = $result->getIdentity();
                  
-                 $session->user = $result->getIdentity();
-                 
-               if(isset($session->requestURL))
+               if(isset($this->session->requestURL))
                  {
-                       $url = $session->requestURL;
-                       unset($session->requestURL);
+                       $url = $this->session->requestURL;
+                       unset($this->session->requestURL);
                    	$this->_redirect($url);
                  }
 
@@ -46,7 +48,7 @@ class IndexController extends Zend_Controller_Action
 	              $this->_helper->getHelper('FlashMessenger')
                            ->addMessage('You were successfully logged in.');
                      
-    	              $this->_redirect('/'.$session->user->getuserType()->getuserType().'/home');
+    	              $this->_redirect('/'.$this->session->user->getuserType()->getuserType().'/home');
 
                   }  // end if auth isValid
               }
@@ -66,8 +68,16 @@ class IndexController extends Zend_Controller_Action
 
     public function logoutAction()
     {
-       Zend_Auth::getInstance()->clearIdentity();
-        $this->_redirect('/');
+
+        if(isset($this->session->user))
+        {
+            unset($this->session->user);
+            $this->_redirect('/');
+        }
+        else
+        {
+            $this->_redirect('/');
+        }
     }
 
 

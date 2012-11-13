@@ -13,6 +13,8 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $this->_helper->layout->setLayout('admin');
+
         if(!isset ($this->session->admin))
         {           
 

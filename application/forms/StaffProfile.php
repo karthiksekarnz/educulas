@@ -49,7 +49,7 @@ class Application_Form_StaffProfile extends ZendX_JQuery_Form
 
 		));
 
-		$this->addElement("text", "password", array(
+		$this->addElement("hidden", "password", array(
 			"label" => "Password",
 			"required" => true,
                         "value" => substr(sha1(mt_rand()), 0, 16),
