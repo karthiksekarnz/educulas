@@ -33,17 +33,30 @@ class CampusEntityUserProfileProxy extends \Campus\Entity\UserProfile implements
         return parent::getProfId();
     }
 
-    public function setProfName($profName)
+     public function setProfFirstName($profFirstName)
     {
         $this->_load();
-        return parent::setProfName($profName);
+        return parent::setProfFirstName($profFirstName);
     }
 
-    public function getProfName()
+    public function getProfFirstName()
     {
         $this->_load();
-        return parent::getProfName();
+        return parent::getProfFirstName();
     }
+
+    public function setProfLastName($profLastName)
+    {
+        $this->_load();
+        return parent::setProfLastName($profLastName);
+    }
+
+    public function getProfLastName()
+    {
+        $this->_load();
+        return parent::getProfLastName();
+    }
+
 
     public function setProfGender($profGender)
     {

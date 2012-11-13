@@ -150,7 +150,7 @@ class School
      *
      * @param string $adminUsername
      */
-    public function setAdminUsername($adminUsername)
+    public function setUsername($adminUsername)
     {
         $this->adminUsername = $adminUsername;
     }
@@ -160,7 +160,7 @@ class School
      *
      * @return string $adminUsername
      */
-    public function getAdminUsername()
+    public function getUsername()
     {
         return $this->adminUsername;
     }
@@ -170,7 +170,7 @@ class School
      *
      * @param string $adminPassword
      */
-    public function setAdminPassword($adminPassword)
+    public function setPassword($adminPassword)
     {
         $this->adminPassword = $adminPassword;
     }
@@ -180,7 +180,7 @@ class School
      *
      * @return string $adminPassword
      */
-    public function getAdminPassword()
+    public function getPassword()
     {
         return $this->adminPassword;
     }

@@ -1,5 +1,5 @@
 <?php
-class Application_Form_StaffProfile extends Twitter_Form
+class Application_Form_StaffProfile extends ZendX_JQuery_Form
 {
     protected $em;
     public function init()
@@ -11,11 +11,23 @@ class Application_Form_StaffProfile extends Twitter_Form
 
 		$this->addElement("text", "firstname", array(
 			"label" => "First name",
-                        "value" => ""))
-                        ;
+                        "required" => "true",
+                        'validators' => array ('NotEmpty' => array (
+                                                  'validator' => 'NotEmpty',
+                                                  'options' => array (
+                                                   'messages' => 'Enter First Name'))),
+
+                         "value" => "" ));
+                      
+                        
 
                 $this->addElement("text", "lastname", array(
 			"label" => "Surname",
+                        "required" => "true",
+                    'validators' => array ('NotEmpty' => array (
+                                                  'validator' => 'NotEmpty',
+                                                  'options' => array (
+                                                   'messages' => 'Enter Last Name'))),
                         "value" => ""
 		));
 
@@ -28,6 +40,11 @@ class Application_Form_StaffProfile extends Twitter_Form
 
                  $this->addElement("text", "username", array(
 			"label" => "Username",
+                        "required" => "true",
+                       'validators' => array ('NotEmpty' => array (
+                                                  'validator' => 'NotEmpty',
+                                                  'options' => array (
+                                                   'messages' => 'Enter Username'))),
                         "value" => ""
 
 		));
@@ -120,8 +137,8 @@ class Application_Form_StaffProfile extends Twitter_Form
 		));
           
 
-		$this->addElement("submit", "register", array("label" => "Register"));
-		$this->addElement("reset", "reset", array("label" => "Reset"));
+		$this->addElement("submit", "register", array("label" => "Register","class" => "btn btn-primary"));
+		$this->addElement("reset", "reset", array("label" => "Reset","class" => "btn"));
 
 
     $this->addDisplayGroups(array(

@@ -49,17 +49,17 @@ class StudentService {
     public function addstudent($studprofile)
     {
         $currentdate = date("d/m/Y-H:i:s");
-        
+
+       
+
         $this->userent->setUsername($studprofile['username']);
-        $this->userent->setPassword($this->createPassword($studprofile['password'],$currentdate));
+        $this->userent->setPassword($this->userent->encryptPassword($studprofile['password'],$currentdate));
         $this->userent->setRegisteredDate($currentdate);
         $this->userent->setLastVisitedTime($currentdate);
-        $this->userent->setLastVisitedIp('104.234.43.57');//($this->_request->getServer('REMOTE_ADDR'));
-
-
+        $this->userent->setLastVisitedIp('104.234.43.57');
         $this->userent->setUserType($this->em->getRepository('Campus\Entity\Usertype')->findOneByuserType('student'));
-
-        $this->profileent->setProfName($studprofile['firstname']." ".$studprofile['lastname']);
+        $this->profileent->setProfFirstName($studprofile['firstname']);
+        $this->profileent->setProfLastName($studprofile['lastname']);
         $this->profileent->setProfGender($studprofile['gender']);
         $this->profileent->setProfDob($studprofile['dob']);
         $this->profileent->setProfPob($studprofile['pob']);
@@ -79,6 +79,7 @@ class StudentService {
         $this->stuent->setStudProf($this->profileent);
 
         return $this->stuent;
+     
 
     }
 
@@ -88,10 +89,6 @@ class StudentService {
         $this->em->flush();
     }
 
-    public static function createPassword ($rawpass,$salt)
-    {
-	$password = sha1($rawpass.sha1($salt));
-        return $password;
-    }
+   
 }
 ?>

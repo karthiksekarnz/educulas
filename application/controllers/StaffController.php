@@ -2,34 +2,47 @@
 
 class StaffController extends Zend_Controller_Action
 {
-    protected $em;
-    const PARAM_GET_ID = 1;// 'id';
+
+    protected $em = null;
+    protected $session;
 
     public function init()
     {
         $this->em = Zend_Registry::get('doctrine')->getEntityManager();
+        $this->session = new Zend_Session_Namespace('campus.auth');
     }
 
     public function indexAction()
     {
-        
+        if(!isset ($this->session->admin))
+                $this->_redirect('/admin');        
     }
 
-    public function createprofileAction(){
-
+    public function createprofileAction()
+    {
+        if(!isset ($this->session->admin))
+                $this->_redirect('/admin');
+        
         $staffProfile = new Application_Form_StaffProfile();
         $this->view->createform = $staffProfile;
 
-        if($this->_request->isPost()){
-
-                $profileValues = $this->_getAllParams();               
-                $profileService = new \Campus\Entity\Service\StaffService($this->em);
-                $profileData = $profileService->createprofile($profileValues);
-                $savestaff = $profileService->saveprofile($profileData);             
+      if ($this->getRequest()->isPost())
+      {        
+        if($staffProfile->isValid($this->getRequest()->getPost()))
+        {
+            $profileValues = $this->_getAllParams();               
+            $profileService = new \Campus\Entity\Service\StaffService($this->em);
+            $profileData = $profileService->createprofile($profileValues);
+            $savestaff = $profileService->saveprofile($profileData);             
         }
+      }
     }//End of create profile controller
+    
 
-    public function editprofileAction(){
+    public function editprofileAction()
+    {
+        if(!isset ($this->session->admin))
+                $this->_redirect('/admin');
 
         $editForm = new Application_Form_StaffProfile();
         $this->view->editform = $editForm;
@@ -45,5 +58,15 @@ class StaffController extends Zend_Controller_Action
          $editForm->getElement('pob')->setValue($userData->getProf()->getProfPob());
     }
 
+    public function homeAction()
+    {
+        $session = new \Zend_Session_Namespace('campus.auth');
+        $profname = $this->em->find('Campus\Entity\UserProfile',$session->user->getUserid());
+        $this->view->profname = $profname->getProfFirstName();
+    }
+
+
 }
+
+
 

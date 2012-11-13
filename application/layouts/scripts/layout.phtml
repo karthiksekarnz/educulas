@@ -6,37 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-<?php echo $this->headLink(); ?>
 
-   
 
     <?php echo $this->jQuery()
            ->setVersion('1.8')
            ->setUiVersion('1.8')
            ->addStylesheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/flick/jquery-ui.css')
     ?>
-    
-     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-    <?php echo $this->headLink(); ?>
 
-    <?php
 
-        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
 
-        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme.css');
-        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/custom.css');
-        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme-responsive.css');
-        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/docs.css');
-        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/js/google-code-prettify/prettify.css');
-        echo  $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/token-input.css');
-        echo  $this->headScript()->appendFile($baseUrl.'/stuff/js/jquery.tokeninput.js');
-        echo  $this->headScript()->appendFile($baseUrl.'/js/bootstrap.min.js');
-        echo  $this->headScript()->appendFile($baseUrl.'/js/bootstrap-button.js');
-   
+   <?php
+
+          $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme.css');
+          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/custom.css');
+          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/mytheme-responsive.css');
+          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/docs.css');
+          $this->headLink()->appendStylesheet($baseUrl.'/stuff/js/google-code-prettify/prettify.css');
+          $this->headLink()->appendStylesheet($baseUrl.'/stuff/css/token-input.css');
+          $this->headScript()->appendFile($baseUrl.'/stuff/js/jquery.tokeninput.js');
+          $this->headScript()->appendFile($baseUrl.'/js/bootstrap.min.js');
+          $this->headScript()->appendFile($baseUrl.'/js/bootstrap-button.js');
+
+        echo $this->headLink();
+
 
    ?>
 
-    
+
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -50,13 +48,14 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/stuff/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/stuff/ico/apple-touch-icon-57-precomposed.png">
 
+
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
     <!-- Navbar
     ================================================== -->
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top shadowbox">
       <div class="navbar-inner">
 
         <div class="container">
@@ -65,7 +64,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand pull-left" href="/"><img src="<?= $baseUrl; ?>/img/ed.png" alt="Educulas"/></a>
+          <a class="brand pull-left" href="/"><img src="<?= $baseUrl; ?>/stuff/img/ed.png" alt="Educulas"/></a>
           <div class="nav-collapse collapse">
           </div>
         </div>
@@ -80,13 +79,7 @@
     <p class="lead">Overview of the project, it's contents, and how to get started with a simple template.</p>
   </div>
 </header> -->
-<div id="shadow-head" style="height: 58px;
-background-repeat: repeat-x;
-position: fixed;
-top: 64px;
-width: 100%;
-z-index: -5;
-display: block;"></div>
+<div id="shadow-head"></div>
 
   <div class="container container-fluid">
       
@@ -96,15 +89,20 @@ display: block;"></div>
 </div>
 
 
-<footer class="footer foot" style="padding:15px;">
-    <div class="row">
+<div class="footer" style="padding:15px;">
+   
+         <div class="container">
+              
         <div class="span2"></div>
         <div class="span2"></div>
         <div class="span2">
-            <a href="http://actualityindia.com/"> <img src="<?=$baseUrl; ?>/img/a1.png"  onmouseover="this.src='<?=$baseUrl; ?>/img/a2.png'" onmouseout="this.src='<?=$baseUrl; ?>/img/a1.png'" /></a>
+            <a href="http://actualityindia.com/about/"> <img src="<?=$baseUrl; ?>/stuff/img/a1.png"  onmouseover="this.src='<?=$baseUrl; ?>/stuff/img/a2.png'" onmouseout="this.src='<?=$baseUrl; ?>/stuff/img/a1.png'" /></a>
         </div>
-    </div>
-</footer>
+         <div class="nav-collapse collapse">
+          </div>
+         </div>
+    
+</div>
   <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

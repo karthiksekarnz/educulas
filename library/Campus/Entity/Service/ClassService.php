@@ -31,25 +31,23 @@ use Campus\Entity\Teacher;
 
 class ClassService {
 
-    const Currentschool = 1;
-    
+    const Currentschool = 1;    
     protected $em;
     protected $papersent;
     protected $classent;
     protected $teacherent;
 
 
-    public function __construct(EntityManager $em){
-
-        
+    public function __construct(EntityManager $em)
+    {        
         $this->em = $em;
         $this->papersent = new Papers();
         $this->classent = new Classes();
         $this->teacherent = new Teacher();
     }
 
-    public function addclass($classdata){
-
+    public function addclass($classdata)
+    {
         $this->classent->setClassName($classdata['classname']);
         $this->classent->setTermStart($classdata['tstart']);
         $this->classent->setTermEnd($classdata['tend']);

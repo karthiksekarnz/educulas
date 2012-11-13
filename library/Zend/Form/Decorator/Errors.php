@@ -55,15 +55,35 @@ class Zend_Form_Decorator_Errors extends Zend_Form_Decorator_Abstract
             return $content;
         }
 
-        $separator = $this->getSeparator();
+        /*$separator = $this->getSeparator();
         $placement = $this->getPlacement();
-        $errors    = $view->formErrors($errors, $this->getOptions());
+        $errors    = $view->formErrors($errors, $this->getOptions());*/
+
+        // Twitter Errors
+        $element->setAttrib("class", trim("error " . $element->getAttrib("class")));
+
+		$wrapper = $element->getDecorator("outerwrapper");
+		if($wrapper)
+		{
+			$wrapper->setOption("class", trim("error " . $wrapper->getOption("class")));
+		}
+
+		$separator = $this->getSeparator();
+		$placement = $this->getPlacement();
+		$errorHtml = "";
+		foreach($errors as $currentError)
+		{
+			$errorHtml .= '<span class="help-block">'.$currentError.'</span>';
+		}
+
+        //
+
 
         switch ($placement) {
             case self::APPEND:
-                return $content . $separator . $errors;
+                return $content . $separator . $errorHtml;
             case self::PREPEND:
-                return $errors . $separator . $content;
+                return $errorHtml . $separator . $content;
         }
     }
 }

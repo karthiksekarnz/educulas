@@ -1,15 +1,14 @@
-
-
-<BR/>
 <div class="container">
+<?php
 
-
-
+        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+ ?>
     <h1><BR/></h1>`
     <p class="marketing-byline"></p>
 
     <div class="row">
       <div class="span4">
+  
 <strong></strong>
 <p class="lead">
 
@@ -22,44 +21,19 @@ Educulas is a next generation learning initiative by Actuality.
 
 
       </div>
-      <div class="span4">
-
-  &nbsp
+      <div class="span3">
 
       </div>
       <div class="span4">
-          <div class="signin">
-
-<p class="lead">
-    Sign in
-</p>
-      <form class="form-inline">
-
- <input class="input-xlarge" type="text" placeholder="username">
-
-<br/><br/>
-
-
-<input type="password" class="input-xlarge" type="text" placeholder="password">
-
-
-<br/>
-
-<br/>
-
-
-<button type="submit" class="btn btn-primary">Sign in</button></form>
+          <div class="signin shadowbox">
+              <h4>Sign in</h4>
+               <div class="error"><?=$this->message;?></div>
+              <?=$this->loginform; ?>
 
       </div>
 
-            <div class="clear"></div>
-        <div style="position: absolute;
-width: 434px;
-z-index: -1;
-margin-top: 5px;
-background-image: url(http://zicedemo.com/images/shadowForm.png);
-height: 33px;
-margin-left: -20px;"></div>
+<div class="clear"></div>
+<!--<div id="shadowform"></div>-->
 
       </div>
       
@@ -69,6 +43,6 @@ margin-left: -20px;"></div>
 </div>
 
 
-
+</div>
 
 

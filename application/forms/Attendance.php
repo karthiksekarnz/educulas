@@ -43,38 +43,28 @@ class Application_Form_Attendance extends Twitter_Form {
         $classlist->setLabel("class list");
         $this->addElement($classlist);
          
-         $this->addElement("select", "year", array(
+  $this->addElement("select", "year", array(
 			"label" => "Academic year",
 			"multiOptions" => array(
-                                "1" => "2010",
-				"2" => "2011",
-                                "3" => "2012"
-			)));
-
-       
-       //$jqform = new ZendX_JQuery_Form();
-
-      /*  $cus = new ZendX_JQuery_Form_Element_CalendarLink('datepicker');
-        $cus->setLabel("Select a Date");
-       $aj = new ZendX_JQuery_Form_Element_Ajaxlink('Club Roster',
-      'attendance/show',
-      array('update' => '#content',
-             'attribs' => array('class' => 'btn btn-primary',
-             'href' => 'attendance/show'),
-             'method' => 'post'),
-      array('format' => 'html')
-      );
+                                "2010" => "2010",
+				"2011" => "2011",
+                                "2012" => "2012"
+   )));
 
 
-        $jqform->addElements(array($aj));
-        $this->addSubForm($jqform,'jqform');
-        
+   $this->addDisplayGroups(array(
+        'col1' => array(
+        'options'  => array('description' => '','class' => ''),
+        'elements' => array('classy'),
+    ),
 
-        $this->addElement("submit","load",array("data-loading-text" =>"loading...","onclick" => "$('.span10').load('" . "attendance/show" . "', $('.form-vertical').serializeArray()); return false;"))
-                ->setElementDecorators(array("ViewHelper",
-                array(array("data" => "HtmlTag"),array("tag" => "dt","class" => "load")),
-                array(array("row" => "HtmlTag"),array("tag" => "dd"))
-        ));*/
+    'col2' => array(
+        'options'  => array('description' => ''),
+        'elements' => array('year'),
+    )
+  ));
+
+  $this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
 
         $this->setDecorators(array(
             "formelements",

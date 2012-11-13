@@ -15,59 +15,65 @@
  *  limitations under the License.
  *  under the License.
  */
-
+namespace Campus\Auth;
+use Campus\Entity\Users;
 
 /**
  * 
  * @author karthik sekar
  */
-
-class Campus_Auth_Adapter implements Zend_Auth_Adapter_Interface
+class Adapter implements \Zend_Auth_Adapter_Interface
 {
     protected $username;
     protected $password;
+    protected $salt;
     protected $userRepository;
+    protected $usertypeRepository;
+    protected $isadmin;
     protected $user = null;
+    protected $em;
 
-    public function __construct($username,$password)
+    public function __construct($username,$password,$admin = false)
     {
         $this->username = $username;
         $this->password = $password;
-
-        $em = \Zend_Registry::get('doctrine')->getEntityManager();
-        $this->userRepository = $em->getRepository('\Campus\Entity\Users');       
+        $this->isadmin = $admin;
+        $this->em = \Zend_Registry::get('doctrine')->getEntityManager();
+        $this->userRepository = $this->em->getRepository('\Campus\Entity\Users');
+        $this->schoolRepository = $this->em->getRepository('\Campus\Entity\School');
+        $this->usertypeRepository = $this->em->getRepository('\Campus\Entity\Usertype');
 
     }
 
-    // main authentication method
-  // queries database for match to authentication credentials
-  // returns Zend_Auth_Result with success/failure code
   public function authenticate()
   {
-    $users = $this->userRepository->findBy(array('username' => $this->username));
-
-    if (!empty($users)) { // Is isset() the proper check?
-
+   
+   $users = $this->isadmin == true ? $this->schoolRepository->findBy(array('adminUsername' => $this->username)):  $this->userRepository->findBy(array('username' => $this->username));
+     
+    if (!empty($users))
+    {       
       $user = $users[0];
+      $this->salt = $this->isadmin == true ? $user->getSubscriptionDate() : $user->getRegisteredDate();
 
-      $encrytedPassword = User::encryptPassword($this->password, $user->salt);
+      $encrytedPassword = Users::encryptPassword($this->password,$this->salt);
 
-      if ($encrytedPassword == $user->password) {
-
-          $this->user = $user;
-
-          // I changed this to return $this->user. It was $this->username.
-	  //--$returnValue = new \Zend_Auth_Result(\Zend_Auth_Result::SUCCESS, $this->username, array());
+      if ($encrytedPassword == $user->getPassword())
+      {
+          $this->user = $user;          
           $returnValue = new \Zend_Auth_Result(\Zend_Auth_Result::SUCCESS, $this->user, array());
-       }
+      }
+      
     }
 
-    if (is_null($this->user)) {
-
+    if (is_null($this->user))
+    {
         $returnValue =  new \Zend_Auth_Result(\Zend_Auth_Result::FAILURE, null, array('Authentication unsuccessful'));
     }
 
     return $returnValue;
   }
+
+
+
 }
 ?>

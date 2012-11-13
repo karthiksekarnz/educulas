@@ -265,8 +265,8 @@ class ZendX_JQuery_View_Helper_AjaxLink extends Zend_View_Helper_HtmlElement
                     
                 if(isset($options['form']))
                 {
-                    $js[] = sprintf('%s("%s").load("%s",%s("%s").serialize(), function() { %s });return false;',
-                    $jqHandler,$options['update'], $url, $jqHandler,$options['form'],$attribs['propagate']);
+                    $js[] = sprintf('%s("%s").load("%s",%s("%s").serialize());return false;',
+                    $jqHandler,$options['update'], $url, $jqHandler,$options['form']);
                 }
                 else
                 {

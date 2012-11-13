@@ -56,12 +56,11 @@ class StaffService {
         $this->userent->setPassword($this->createPassword($staffprofile['password'],$currentdate));
         $this->userent->setRegisteredDate($currentdate);
         $this->userent->setLastVisitedTime($currentdate);
-        $this->userent->setLastVisitedIp('104.234.43.57');//($this->_request->getServer('REMOTE_ADDR'));
+        $this->userent->setLastVisitedIp('104.234.43.57');        
+        $this->userent->setUserType($this->em->getRepository('Campus\Entity\Usertype')->findOneByuserType('staff'));
 
-        
-        $this->userent->setUserType($this->em->getRepository('Campus\Entity\Usertype')->findOneByuserType('teacher'));
-
-        $this->profileent->setProfName($staffprofile['firstname']." ".$staffprofile['lastname']);
+        $this->profileent->setProfFirstName($staffprofile['firstname']);
+        $this->profileent->setProfLastName($staffprofile['lastname']);
         $this->profileent->setProfGender($staffprofile['gender']);
         $this->profileent->setProfDob($staffprofile['dob']);
         $this->profileent->setProfPob($staffprofile['pob']);
@@ -86,7 +85,7 @@ class StaffService {
 
     public function saveprofile (Teacher $teach) {
         $this->em->persist($teach);
-        $this->em->flush(); //save the user
+        $this->em->flush();
     }
 
     public function updateUser () {

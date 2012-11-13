@@ -18,15 +18,15 @@ class AttendanceRepository extends EntityRepository
     {
       $year = $attdparams['year'];
       $classid = $attdparams['classy'];
-      $nm = cal_days_in_month(CAL_GREGORIAN, $month,$year );
 
+      $nm = cal_days_in_month(CAL_GREGORIAN, $month,$year );
        //,'stdate' => '1/'.$month.'/'.$year,'endate' => $nm.'/'.($month+1).'/'.$year
       $attdstudents = $this->_em->getRepository('Campus\Entity\Student')->findBy(array('studClass' => $classid));
 
       $stlist = array();
       foreach($attdstudents as $student)
-      {         
-         $tmpar = array('id'=> $student->getStudId(),'stud' => $student->getStudProf()->getProfName());
+      {          
+         $tmpar = array('id'=> $student->getStudId(),'stud' => $student->getStudProf()->getProfFirstName()." ".$student->getStudProf()->getProfLastName());
          $params = array('classid' => $classid,'schoolid' => self::school_id,'studid' => $student->getStudId());
 
          //$attd = $this->_em->createQuery('SELECT at.attdRating rat,at.attdDate dat FROM Campus\Entity\Attendance at WHERE (at.school = :schoolid AND at.class = :classid AND at.stud = :studid)');

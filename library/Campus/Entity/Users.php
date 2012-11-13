@@ -193,4 +193,11 @@ class Users
     {
         return $this->userType;
     }
+
+    public static function encryptPassword ($rawpass,$salt)
+    {
+	$password = sha1($rawpass.sha1($salt));
+        return $password;
+    }
+
 }
