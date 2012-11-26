@@ -67,7 +67,7 @@ class Application_Form_Attendance extends Twitter_Form {
   $this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
 
         $this->setDecorators(array(
-            "formelements",
+            "FormElements",
             array("HtmlTag",array("tag" => "div","class" => "fm"))
         ));
                       
