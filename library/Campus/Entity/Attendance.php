@@ -86,7 +86,7 @@ class Attendance
      *
      * @param datetime $attdDate
      */
-    public function setAttdDate($attdDate)
+    public function setAttdDate(\DateTime $attdDate)
     {
         $this->attdDate = $attdDate;
     }

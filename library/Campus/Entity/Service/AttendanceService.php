@@ -37,7 +37,7 @@ class AttendanceService
     protected $classesent;
     protected $attdrep;
     protected $upent;
-
+    const schoolid = 1;
 
     public function __construct(EntityManager $em) 
     {        
@@ -73,8 +73,36 @@ class AttendanceService
         {
 
         }
-
        
+    }
+
+    public function createattdsheet()
+    {
+        //$this->attdent->
+    }
+
+    public function saveattdsheet($grid,$month,$year,$classy)
+    {
+       foreach ($grid as $data)
+       {
+           $id = $data['id'];
+           unset($data['id']);
+           unset($data['stud']);
+
+           foreach($data as $day => $attd)
+           {
+              $date = $day."/".$month."/".$year;
+              $cdat = new \DateTime($date);
+               $this->attdent->setAttdRating($attd);
+               $this->attdent->setAttdDate($cdat);
+               print_r($cdat);
+               $this->attdent->setClass($this->em->find('Campus\Entity\Classes',$classy));
+               $this->attdent->setSchool($this->em->find('Campus\Entity\School',self::schoolid));
+               $this->attdent->setStud($this->em->find('Campus\Entity\Student',$id));
+               
+           }
+
+       }
     }
 
 

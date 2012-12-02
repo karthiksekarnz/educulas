@@ -174,4 +174,20 @@ color: white;
 
 /** the form elements **/
 
+/*============*/
+/* grid */
+/*==============*/
+.oddRow
+{
+    background-image: none;
+    background-color: #EBEBEB;
+}
+
+.ui-state-hover
+{
+    background-image: none !important;
+    background-color: #fff !important;
+    border: 1px solid #DDD !important;
+    color: #444 !important;
+}
 

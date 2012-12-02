@@ -48,5 +48,7 @@ class AttendanceRepository extends EntityRepository
        
         return \Zend_Json::encode($stlist);
     }
+
+  
 }
 ?>

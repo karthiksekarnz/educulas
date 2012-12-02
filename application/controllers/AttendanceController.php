@@ -63,15 +63,14 @@ class AttendanceController extends Zend_Controller_Action
           $this->view->colmodel = Zend_Json::encode($colmodel);//"[ { name: 'id', index: 'id', width: 90, sorttype: \"int\" },{\"name\":\"stud\",\"index\":\"stud\",\"editable\":\"true\"},{\"name\":1,\"index\":1,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":2,\"index\":2,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":3,\"index\":3,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":4,\"index\":4,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":5,\"index\":5,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":6,\"index\":6,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":7,\"index\":7,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":8,\"index\":8,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":9,\"index\":9,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":10,\"index\":10,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":11,\"index\":11,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":12,\"index\":12,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":13,\"index\":13,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":14,\"index\":14,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":15,\"index\":15,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":16,\"index\":16,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":17,\"index\":17,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":18,\"index\":18,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":19,\"index\":19,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":20,\"index\":20,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":21,\"index\":21,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":22,\"index\":22,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":23,\"index\":23,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":24,\"index\":24,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":25,\"index\":25,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":26,\"index\":26,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":27,\"index\":27,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":28,\"index\":28,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":29,\"index\":29,\"editable\":\"true\",\"width\":\"25px\"},{\"name\":30,\"index\":30,\"editable\":\"true\",\"width\":\"25px\"}]";//
           $this->view->data = $attdsheet;//"[{\"id\":\"1\",\"stud\":\"karthik Sekar\"},{\"id\":\"2\",\"stud\":\"Anand Sathya\"},{\"id\":\"3\",\"stud\":\"Mayank Sharma\"},{\"id\":\"4\",\"stud\":\"Shashank Kapoor\"}]";//
           $this->view->month = $month;
-        
+          $this->view->year = $attdparams['year'];
+          $this->view->classy = $attdparams['classy'];
      
     }
 
     public function dataAction()
     {
-        $this->_helper->getHelper('layout')->disableLayout();
-        
-        // = $this->session->data;
+        $this->_helper->getHelper('layout')->disableLayout();       
     }
 
     public function saveAction()
@@ -82,6 +81,20 @@ class AttendanceController extends Zend_Controller_Action
         if($this->_request->getPost())
         {
             $edit = $this->_getAllParams();
+           /* $id = array();
+            foreach($edit['grid'] as $data)
+            {
+                array_push($id,$data['id']);
+                unset($data['id']);
+                unset($data['stud']);
+
+                echo "id:".$id;
+                echo "month:".$edit['month']." year:".$edit['year'];
+                print_r($data);                
+            }*/
+                $saveservice = new \Campus\Entity\Service\AttendanceService($this->em);
+                $savedata = $saveservice->saveattdsheet($edit['grid'], $edit['month'], $edit['year'],$edit['classy']);
+
         }
     }
 
